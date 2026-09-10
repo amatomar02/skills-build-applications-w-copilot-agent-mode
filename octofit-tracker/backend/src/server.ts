@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express from 'express';
 import { connectDatabase } from './config/database.js';
 import { usersRouter } from './routes/users.js';
@@ -13,12 +14,19 @@ const baseUrl = codespaceName
   ? `https://${codespaceName}-8000.app.github.dev`
   : `http://localhost:${port}`;
 
+const frontendPort = 5173;
+const allowedOrigins = codespaceName
+  ? [`https://${codespaceName}-${frontendPort}.app.github.dev`]
+  : [`http://localhost:${frontendPort}`, `http://127.0.0.1:${frontendPort}`];
+
+app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 
 app.get('/api', (_request, response) => {
   response.json({
     message: 'OctoFit Tracker API',
     baseUrl,
+    allowedOrigins,
     endpoints: [
       '/api/users',
       '/api/teams',
