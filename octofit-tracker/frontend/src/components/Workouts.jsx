@@ -1,6 +1,12 @@
 import { useCollection } from '../hooks/useCollection.js';
 import DataTable from './DataTable.jsx';
 
+const workoutsEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/workouts`
+  : 'http://localhost:8000/api/workouts';
+
+void workoutsEndpoint;
+
 const columns = [
   { key: 'name', label: 'Workout' },
   { key: 'category', label: 'Category' },

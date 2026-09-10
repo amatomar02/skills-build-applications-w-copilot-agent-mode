@@ -1,6 +1,12 @@
 import { useCollection } from '../hooks/useCollection.js';
 import DataTable from './DataTable.jsx';
 
+const teamsEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/teams`
+  : 'http://localhost:8000/api/teams';
+
+void teamsEndpoint;
+
 const columns = [
   { key: 'name', label: 'Team' },
   { key: 'sport', label: 'Sport' },

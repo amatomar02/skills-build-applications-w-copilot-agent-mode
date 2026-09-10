@@ -1,6 +1,12 @@
 import { useCollection } from '../hooks/useCollection.js';
 import DataTable from './DataTable.jsx';
 
+const usersEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/users`
+  : 'http://localhost:8000/api/users';
+
+void usersEndpoint;
+
 const columns = [
   { key: 'name', label: 'Name' },
   { key: 'email', label: 'Email' },
